@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Image() {
+function Image({src}) {  
   return (
-    <div>Image</div>
+    <div><img className="mx-auto"  src={ src} /></div>
   )
 }
 
