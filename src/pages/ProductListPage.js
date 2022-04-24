@@ -1,48 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { getProducts } from "../services/ProductService"
 import Item from "../components/Item"
+import Search from '../components/Search'
+import { useProducts } from '../context/productContext'
 
 
 
 
 function ProductListPage() {
 
-  const [products, setProducts] = useState([])
+  const {products} = useProducts()
   const [searchText, setSearchText] = useState("")
 
-  useEffect(() => {
-    (async () => {
-      const products = await getProducts()
-      setProducts(products)
-    })()
-  }, [])
 
-  function handleSearch(e) {    
-    // setSearchText(e.target.value);
-    // products.filter(product =>{
-    //   if(product.brand)
-    // })
-    setProducts()
+  function handleSearch(text) {
+    setSearchText(text.toLowerCase())
   }
 
 
   return (
-    <div className=" p-4">
-      <div className='flex justify-center   mb-5'>       
-        <div className="flex items-center justify-center  flex-row-reverse">
-          <div className="flex  border-2 border-gray-200 rounded">
-            <input onChange={handleSearch} type="text" className="px-4 py-2" placeholder="Search..." />
-            <button className="px-4 text-white bg-gray-600 border-l ">
-              Search
-            </button>
-          </div>
-        </div>
+    <div className="p-4">
+      <Search handleSearch={handleSearch} />
+      <div className='mb-4'>
+        {searchText && <h2>Resultados para "<b>{searchText}</b>"  </h2>}
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 justify-center md:grid-cols-3 lg:grid-cols-4 gap-6'>
 
         {
-          
-        products.map(product => <Item key={product.id} product={product} />)
+          products.filter(product => {
+            return (
+              product.brand.toLowerCase().includes(searchText) || product.model.toLowerCase().includes(searchText)
+            )
+          }).map(product => <Item key={product.id} product={product} />)
         }
 
       </div>
