@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { getProducts } from "../services/ProductService"
+import React, {  useState } from 'react'
 import Item from "../components/Item"
 import Search from '../components/Search'
 import { useProducts } from '../context/productContext'
@@ -22,9 +21,9 @@ function ProductListPage() {
     <div className="p-4">
       <Search handleSearch={handleSearch} />
       <div className='mb-4'>
-        {searchText && <h2>Resultados para "<b>{searchText}</b>"  </h2>}
+        {searchText && <h2>Results for &quot;<b>{searchText}</b>&quot;  </h2>}
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 justify-center md:grid-cols-3 lg:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 sm:gap-2 justify-center items-center md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6'>
 
         {
           products.filter(product => {

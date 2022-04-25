@@ -1,13 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from "./components/Header"
 import ProductListPage from "./pages/ProductListPage"
 import ProductDetailsPage from "./pages/ProductDetailsPage"
 import { ProductProvider } from "./context/productContext"
-
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
+  
   return (
     <div>
 
@@ -20,6 +21,10 @@ function App() {
           </Routes>
         </div>
       </ProductProvider>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </div>
   );
 }
