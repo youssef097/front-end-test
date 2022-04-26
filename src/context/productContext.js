@@ -18,7 +18,7 @@ export const ProductProvider = ({ children }) => {
         (async () => {
             const savedProducts = JSON.parse(localStorage.getItem("products"));
             const now = new Date();
-            if (parseInt(savedProducts.expiresAt) > now.getTime()) {
+            if (savedProducts && parseInt(savedProducts.expiresAt) > now.getTime()) {
                 console.log("Getting Products from Cache");
                 setProducts(savedProducts.data);
             } else {
